@@ -18,22 +18,23 @@ import java.util.Set;
  */
 @Controller
 @CrossOrigin
-public class SetController {
+public class PointController {
 
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @GetMapping("/setIndex/{id}")
-    public String setIndex(@PathVariable String id) {
-//        Object viewCount = redisTemplate.opsForValue().get(id);setIndex
-//        model.addAttribute("count", viewCount);
+    @GetMapping("/pointArticle")
+    public String pointArticle(ModelMap modelMap) {
+        String id = "2021";
+        Object viewCount = redisTemplate.opsForValue().get(id);
+        modelMap.put("count", viewCount);
 //        model.addAttribute("id", id);
         return "/article";
     }
 
-    @GetMapping("/upAdd/{id}")
+    @GetMapping("/incrPoint/{id}")
     @ResponseBody
-    public Long upAdd(@PathVariable String id) {
+    public Long incrPoint(@PathVariable String id) {
         Long increment = redisTemplate.opsForValue().increment(id, 1);
         return increment;
     }

@@ -19,14 +19,12 @@ public class RedisBootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RedisBootApplication.class, args);
-
         log.info("****************************************************************************************");
         log.info(" 抽奖活动  {}" ,"http://localhost:8080/draw");
         log.info(" 进度条 {} ","http://localhost:8080/processIndex");
-
-        log.info(" 点赞功能 {} ","http://localhost:8080/setIndex");
-
+        log.info(" 点赞功能 {} ","http://localhost:8080/pointArticle");
         log.info("****************************************************************************************");
+        log.info("排行榜 {}","http://localhost:8080/boardList");
 
     }
 
