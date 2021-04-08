@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.UUID;
+
 @SpringBootApplication
 @EnableAspectJAutoProxy
 public class RedisBootApplication {
@@ -21,10 +23,16 @@ public class RedisBootApplication {
         SpringApplication.run(RedisBootApplication.class, args);
         log.info("****************************************************************************************");
         log.info(" 抽奖活动  {}" ,"http://localhost:8080/draw");
+        log.info("****************************************************************************************");
         log.info(" 进度条 {} ","http://localhost:8080/processIndex");
-        log.info(" 点赞功能 {} ","http://localhost:8080/pointArticle");
+        log.info("****************************************************************************************");
+        log.info(" 阅读量功能 {} ","http://localhost:8080/pointArticle");
         log.info("****************************************************************************************");
         log.info("排行榜 {}","http://localhost:8080/boardList");
+        log.info("****************************************************************************************");
+        log.info(" 接口限流操作 {} ","http://localhost:8080/limitApi/"+ UUID.randomUUID().toString());
+        log.info("****************************************************************************************");
+        log.info(" 商品详情页面，做静态缓存处理 {}","http://localhost:8080/1/details.html");
 
     }
 

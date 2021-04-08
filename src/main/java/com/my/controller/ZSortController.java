@@ -1,5 +1,7 @@
 package com.my.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import java.util.*;
 @CrossOrigin
 public class ZSortController {
 
+    private static final Logger log = LoggerFactory.getLogger(ZSortController.class);
+
     @Autowired
     private RedisTemplate redisTemplate;
 
@@ -29,6 +33,7 @@ public class ZSortController {
         Set range = redisTemplate.opsForZSet().reverseRangeWithScores(id, 0, -1);
         Iterator iterator = range.iterator();
         List<Object> list = new ArrayList<>();
+        log.info("process参数为{}",id);
         while (iterator.hasNext()) {
             Object next = iterator.next();
             list.add(next);
@@ -39,11 +44,13 @@ public class ZSortController {
     @GetMapping("/processAdd/{id}/{desc}")
     @ResponseBody
     public Boolean processAdd(@PathVariable String id, @PathVariable String desc) {
+        log.info("processAdd id {},desc {}",id,desc);
         return redisTemplate.opsForZSet().add(id, desc, System.currentTimeMillis());
     }
 
     @GetMapping("/processIndex")
     public String processIndex(Model model) {
+
         model.addAttribute("id", "1002");
         return "progressBar";
     }
@@ -66,6 +73,7 @@ public class ZSortController {
     @GetMapping("addCount/{id}")
     @ResponseBody
     public List<Object> addCount(@PathVariable String id) {
+        log.info("addCount 参数Id为 {}",id);
         redisTemplate.opsForZSet().incrementScore("tianmao", id, 1);
 
         Set range = redisTemplate.opsForZSet().reverseRangeWithScores("tianmao", 0, -1);
@@ -83,6 +91,7 @@ public class ZSortController {
     @GetMapping("addItem/{id}")
     @ResponseBody
     public  List<Object> addItem(@PathVariable String id) {
+        log.info("addItem 参数Id为 {}",id);
         redisTemplate.opsForZSet().add("tianmao", id, 0);
 
         Set range = redisTemplate.opsForZSet().reverseRangeWithScores("tianmao", 0, -1);

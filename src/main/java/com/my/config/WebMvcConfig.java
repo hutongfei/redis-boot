@@ -21,7 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new CmtInterceptor()).addPathPatterns("/**").excludePathPatterns("/limitApi/*","/limitApi");
 
-        registry.addInterceptor(limitInterceptor).addPathPatterns("/limitApi/*","/limitApi");
+        registry.addInterceptor(limitInterceptor).addPathPatterns("/limitApi/*");
         registry.addInterceptor(new PathInterceptor()).addPathPatterns("/**");
 
     }
