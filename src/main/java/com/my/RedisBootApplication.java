@@ -35,7 +35,8 @@ public class RedisBootApplication {
         log.info(" 接口限流操作 {} ","http://localhost:8080/limitApi/"+ UUID.randomUUID().toString());
         log.info("****************************************************************************************");
         log.info(" 商品详情页面，做静态缓存处理 {}","http://localhost:8080/1/details.html");
-
+        log.info("****************************************************************************************");
+        log.info("Redis分布式锁实现 {}", "http://localhost:8080/demo");
     }
 
 //    public
