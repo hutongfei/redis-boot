@@ -24,19 +24,19 @@ public class RedisBootApplication {
     public static void main(String[] args) {
         SpringApplication.run(RedisBootApplication.class, args);
         log.info("****************************************************************************************");
-        log.info(" 抽奖活动  {}" ,"http://localhost:8080/draw");
+        log.info(" 抽奖活动  {}" ,"http://localhost:9000/draw");
         log.info("****************************************************************************************");
-        log.info(" 物流进度条 {} ","http://localhost:8080/processIndex");
+        log.info(" 物流进度条 {} ","http://localhost:9000/processIndex");
         log.info("****************************************************************************************");
-        log.info(" 阅读量功能 {} ","http://localhost:8080/pointArticle");
+        log.info(" 阅读量功能 {} ","http://localhost:9000/pointArticle");
         log.info("****************************************************************************************");
-        log.info("排行榜 {}","http://localhost:8080/boardList");
+        log.info("排行榜 {}","http://localhost:9000/boardList");
         log.info("****************************************************************************************");
-        log.info(" 接口限流操作 {} ","http://localhost:8080/limitApi/"+ UUID.randomUUID().toString());
+        log.info(" 接口限流操作 {} ","http://localhost:9000/limitApi/"+ UUID.randomUUID().toString());
         log.info("****************************************************************************************");
-        log.info(" 商品详情页面，做静态缓存处理 {}","http://localhost:8080/1/details.html");
+        log.info(" 商品详情页面，做静态缓存处理 {}","http://localhost:9000/1/details.html");
         log.info("****************************************************************************************");
-        log.info("Redis分布式锁实现 {}", "http://localhost:8080/demo");
+        log.info("Redis分布式锁实现 {}", "http://localhost:9000/demo");
     }
 
 //    public

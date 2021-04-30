@@ -43,6 +43,8 @@ public class LimitInterceptor implements HandlerInterceptor {
             long second = annotation.second();
             String ipAddress = IpUtils.getIpAddress(request);
 
+            log.info("**************Ip地址：     {} ****************************** "+ipAddress);
+
             // 此处可用lua 脚本优化
             Long decrement = redisTemplate.opsForValue().increment(ipAddress,1);
             redisTemplate.expire(ipAddress, second, TimeUnit.SECONDS);
