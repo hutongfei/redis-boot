@@ -9,21 +9,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.lang.reflect.UndeclaredThrowableException;
-
 /**
  * 全局异常处理
  * Created by macro on 2020/2/27.
  */
-@ControllerAdvice(basePackages = "com.my.**")
-public class GlobalExceptionHandler {
+@ControllerAdvice(basePackages = "com.my.controller")
+public class GlobalExceptionHandler2 {
 
     @ResponseBody
     @ExceptionHandler(value = RuntimeException.class)
     public CommonResult handle(RuntimeException e) {
         return CommonResult.failed(e.getMessage());
     }
-
 
     @ResponseBody
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -51,11 +48,5 @@ public class GlobalExceptionHandler {
             }
         }
         return CommonResult.validateFailed(message);
-    }
-
-    @ResponseBody
-    @ExceptionHandler(value = Exception.class)
-    public CommonResult errorHandler(Exception e) {
-        return CommonResult.failed(e.getMessage());
     }
 }

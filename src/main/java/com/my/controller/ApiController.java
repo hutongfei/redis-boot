@@ -1,6 +1,6 @@
 package com.my.controller;
 
-import com.my.annotation.InfoAnnotation;
+import com.my.annotation.Idempotent;
 import com.my.annotation.LimitAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author hutf
@@ -28,8 +28,16 @@ public class ApiController {
     @GetMapping("/limitApi/{id}")
     @LimitAnnotation(maxNumber = 20 ,second = 10)
     public String limitApi(@PathVariable String id) {
-        System.out.println(id);
-         return System.currentTimeMillis() + "";
+        System.out.println(id);// 幂等 idempotent
+         return UUID.randomUUID().toString()+ "";
+    }
+
+    @GetMapping("/idempotent/{id}")
+    @Idempotent
+    public String idempotent(@PathVariable String id, HttpServletRequest request) throws InterruptedException {
+        System.out.println(id);// 幂等 idempotent
+        Thread.sleep(2000);
+        return UUID.randomUUID().toString()+ " 幂等" ;
     }
 
 }
