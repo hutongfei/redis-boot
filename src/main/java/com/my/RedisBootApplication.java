@@ -31,7 +31,8 @@ public class RedisBootApplication {
         log.info("****************************************************************************************");
         log.info(" 商品详情页面，做静态缓存处理 {}","http://localhost:9000/1/details.html");
         log.info("****************************************************************************************");
-        log.info("Redis分布式锁实现 {}", "http://localhost:9000/demo");
+        log.info("Redis分布式锁实现 {}", "http://localhost:9000/redisLock");
+        log.info("Redission分布式锁实现 {}", "http://localhost:9000/redissionLock");
     }
 
 //    public
