@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author hutf
@@ -24,12 +25,14 @@ public class ApiController {
     private RedisTemplate redisTemplate;
 
 
-    /** 限流操作 **/
+    /**
+     * 限流操作
+     **/
     @GetMapping("/limitApi/{id}")
-    @LimitAnnotation(maxNumber = 20 ,second = 10)
+    @LimitAnnotation(maxNumber = 20, second = 10)
     public String limitApi(@PathVariable String id) {
         System.out.println(id);// 幂等 idempotent
-         return UUID.randomUUID().toString()+ "";
+        return UUID.randomUUID().toString() + "";
     }
 
     @GetMapping("/idempotent/{id}")
@@ -37,9 +40,16 @@ public class ApiController {
     public String idempotent(@PathVariable String id, HttpServletRequest request) throws InterruptedException {
         System.out.println(id);// 幂等 idempotent
         Thread.sleep(2000);
-        return UUID.randomUUID().toString()+ " 幂等" ;
+        return UUID.randomUUID().toString() + " 幂等";
     }
 
+
+    @GetMapping("/keyExpireCallback/{id}")
+    public String keyExpireCallback(@PathVariable String id, HttpServletRequest request) throws InterruptedException {
+        redisTemplate.opsForValue().set(id, UUID.randomUUID().toString());
+        redisTemplate.expire(id, 10, TimeUnit.SECONDS);
+        return "OK";
+    }
 
 
 }
